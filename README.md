@@ -1,20 +1,28 @@
+<h1> Hi, I'm Sofia Teixeira! <img width="50px" alt="Spider-Man animated sticker" src="https://media.giphy.com/media/nLbuTAfvPwMFzYFXR3/giphy.gif" /></h1>
+<img align='right' width="230px" alt ="Pixel art coding sticker" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExamVyMmhyZnBtaHo3bmdnaGg1dTd5aWxsZW5nN3BkbzEzeWJsa3hpeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/4XXo8A7CIW1lZGgdhm/giphy.gif" />
+<p><em>Software Development Student at <a href="https://istec-porto.pt/">ISTEC Porto </a></em></p>
 <p align="left">
-<img height="115px" alt="Hello, World!" src="https://i.postimg.cc/TYw4pWDj/terminal-hello-world.gif" />
+  <a href="https://www.linkedin.com/in/sofiaateixeiraa"><img height="20px" alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg%3D%3D" /></a>&nbsp;
+  <a href="mailto:anasofia.txra@gmail.com"><img height="20px" alt="Email" src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 </p>
 
-<h1 align="left">💻 Sofia Teixeira</h1>
+<h3><img height="40px" alt="Animated anime kaomoji sticker" src="https://media.giphy.com/media/PiIiEQ1R4HBV9YV9xw/giphy.gif"> A little more about me...</h3>
 
-<p align="left">
-<img alt="Typing SVG" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=900&size=25&duration=4000&pause=500&color=A78BFA&Center=true&width=440&height=45&lines=Software+Development+Student;Always+learning+new+things;Focused+on+Full+Stack" />
-</p>
+```js
+const sofia = {
+  name: "Sofia Teixeira",
+  pronouns: "she/her",
+  spokenLanguages: ["pt_PT", "en_US"],
 
-<details open>
-  <summary><h2>👩‍💻 About Me</h2></summary>
-  <p align="left">I'm a Software Development student at ISTEC Porto, with a prior vocational background in IT equipment management (final grade 18/20). I've done IT support and repair internships in Portugal and, through Erasmus+, in Málaga and Berlin.</p>
-  <p align="left">My main priority is full stack development, covering both the front end and the back end of web and mobile applications.</p>
-  <p align="left">I built SensiGlove, a sign language translation glove (Arduino, C++, Bluetooth), and ComicTrack, a Flutter app with Firebase for managing comic collections.</p>
-  <p align="left">🌍 Portuguese (native) · English (professional working proficiency)</p>
-</details>
+  background: "IT support internships (Porto, Málaga, Berlin)",
+  focus: "Full stack development (web and mobile)",
+  lookingFor: "Curricular internship in software development",
+
+  interests: ["Books", "Movies", "Videogames", "Traveling"],
+
+  funFact: "Made my first video game at 11, in Scratch",
+};
+```
 
 <details open>
   <summary><h2>🛠️ Tech Stack</h2></summary>
@@ -100,12 +108,4 @@
     </a>
   </p>
   <p align="left"><sub><b>Note:</b> These stats are only metrics of my GitHub activity and the languages my code consists of. They don't reflect experience or skill level.</sub></p>
-</details>
-
-<details open>
-  <summary><h2>📫 Get in Touch</h2></summary>
-  <p align="left">
-    <a href="https://www.linkedin.com/in/sofiaateixeiraa"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg%3D%3D" /></a>&nbsp;
-    <a href="mailto:anasofia.txra@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  </p>
 </details>
