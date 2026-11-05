@@ -1,0 +1,398 @@
+name: Update README cards
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: update-readme-cards
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Stats card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: username=sofiaateixeiraa&theme=react&bg_color=1F222E&title_color=A78BFA&icon_color=67E8F9&ring_color=A78BFA&hide_border=true&show_icons=true&rank_icon=github&include_all_commits=true&count_private=true&custom_title=Sofia%20Teixeira's%20GitHub%20Stats
+          path: profile/stats.svg
+          token: ${{ secrets.STATS_TOKEN }}
+
+      - name: Streak stats card
+        uses: DenverCoder1/github-readme-streak-stats@main
+        with:
+          options: user=sofiaateixeiraa&background=1F222E&hide_border=true&stroke=4B5563&ring=FB923C&fire=FB923C&currStreakNum=FACC15&sideNums=FACC15&currStreakLabel=F43F5E&sideLabels=F43F5E&dates=9CA3AF&date_format=M%20j%5B%2C%20Y%5D&short_numbers=true&timezone=Europe/Lisbon
+          path: profile/streak.svg
+          token: ${{ secrets.STATS_TOKEN }}
+
+      - name: Top languages card
+        env:
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json
+          import math
+          import os
+          import re
+          from html import escape
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          LANGS_COUNT = 5
+          USER_AGENT = "sofiaateixeiraa-readme-cards"
+          HEADERS = {
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+              "User-Agent": USER_AGENT,
+          }
+
+
+          def get_json(url):
+              with urlopen(Request(url, headers=HEADERS)) as response:
+                  return json.load(response)
+
+
+          def linguist_colors():
+              url = "https://raw.githubusercontent.com/github-linguist/linguist/main/lib/linguist/languages.yml"
+              with urlopen(Request(url, headers={"User-Agent": USER_AGENT})) as response:
+                  text = response.read().decode("utf-8")
+              colors, current = {}, None
+              for line in text.splitlines():
+                  if line and not line[0].isspace() and line.rstrip().endswith(":"):
+                      current = line.rstrip()[:-1].strip().strip("'\"")
+                  elif current:
+                      match = re.match(r'\s+color:\s*["\']?(#[0-9A-Fa-f]{6})', line)
+                      if match:
+                          colors[current] = match.group(1)
+              return colors
+
+
+          def owned_repos():
+              repos, page = [], 1
+              while True:
+                  batch = get_json(
+                      "https://api.github.com/user/repos"
+                      f"?affiliation=owner&per_page=100&page={page}"
+                  )
+                  repos += batch
+                  if len(batch) < 100:
+                      return repos
+                  page += 1
+
+
+          def render(top, colors):
+              total = sum(size for _, size in top)
+              card_width, width, height = 362, 467, 195
+              cx, cy, r, stroke = 277.5, 112.5, 54, 11
+              row_gap = 25
+              circumference = 2 * math.pi * r
+
+              legend = []
+              first_y = cy - (len(top) - 1) * row_gap / 2
+              for i, (name, size) in enumerate(top):
+                  y = first_y + i * row_gap
+                  color = colors.get(name, "#8B949E")
+                  legend.append(
+                      f'<g class="row" style="animation-delay: {450 + i * 150}ms">'
+                      f'<circle cx="31" cy="{y}" r="5" fill="{color}"/>'
+                      f'<text x="45" y="{y + 4}" class="lang">'
+                      f'{escape(name)} {size / total * 100:.2f}%</text></g>'
+                  )
+
+              arcs, keyframes, offset = [], [], 0.0
+              for i, (name, size) in enumerate(top):
+                  length = size / total * circumference
+                  color = colors.get(name, "#8B949E")
+                  delay = 300 + offset / circumference * 1000
+                  duration = max(length / circumference * 1000, 1)
+                  keyframes.append(
+                      f'@keyframes arc{i} {{ from {{ stroke-dasharray: 0 {circumference:.3f}; }} '
+                      f'to {{ stroke-dasharray: {length:.3f} {circumference:.3f}; }} }}'
+                  )
+                  arcs.append(
+                      f'<circle class="arc" cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" '
+                      f'stroke-width="{stroke}" '
+                      f'stroke-dasharray="{length:.3f} {circumference:.3f}" '
+                      f'stroke-dashoffset="{-offset:.3f}" '
+                      f'style="animation: arc{i} {duration:.0f}ms linear {delay:.0f}ms backwards" '
+                      f'transform="rotate(-90 {cx} {cy})"/>'
+                  )
+                  offset += length
+
+              return f'''<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+            <title id="title">Most Used Languages</title>
+            <style>
+              .title {{ font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif; fill: #A78BFA; animation: fade 0.8s ease-in-out backwards; }}
+              .lang {{ font: 400 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFFFFF; }}
+              .row {{ animation: fade 0.3s ease-in-out backwards; }}
+              @keyframes fade {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+              {' '.join(keyframes)}
+              @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
+            </style>
+            <rect x="0.5" y="0.5" rx="4.5" width="{card_width - 1}" height="{height - 1}" fill="#1F222E"/>
+            <text x="25" y="35" class="title" textLength="193">Most Used Languages</text>
+            {''.join(legend)}
+            {''.join(arcs)}
+          </svg>
+          '''
+
+
+          def main():
+              colors = linguist_colors()
+              totals = {}
+              for repo in owned_repos():
+                  if repo["fork"]:
+                      continue
+                  for lang, size in get_json(repo["languages_url"]).items():
+                      totals[lang] = totals.get(lang, 0) + size
+              top = sorted(totals.items(), key=lambda item: item[1], reverse=True)[:LANGS_COUNT]
+              if not top:
+                  raise RuntimeError("No language data found")
+              Path("profile").mkdir(exist_ok=True)
+              Path("profile/top-langs.svg").write_text(render(top, colors), encoding="utf-8")
+
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Pin Umbrella-Corporation-Site
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=sofiaateixeiraa&repo=Umbrella-Corporation-Site&theme=react&bg_color=1F222E&title_color=A78BFA&icon_color=67E8F9&hide_border=true&show_icons=false
+          path: profile/pin-Umbrella-Corporation-Site.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pin ComicTrack
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=sofiaateixeiraa&repo=ComicTrack&theme=react&bg_color=1F222E&title_color=A78BFA&icon_color=67E8F9&hide_border=true&show_icons=false
+          path: profile/pin-ComicTrack.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pin SensiGlove
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=sofiaateixeiraa&repo=SensiGlove&theme=react&bg_color=1F222E&title_color=A78BFA&icon_color=67E8F9&hide_border=true&show_icons=false
+          path: profile/pin-SensiGlove.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show up to three languages on each pin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - <<'PY'
+          import base64
+          import json
+          import os
+          import re
+          import textwrap
+          from html import escape, unescape
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          repos = [
+              "Umbrella-Corporation-Site",
+              "ComicTrack",
+              "SensiGlove",
+          ]
+          languages_url = "https://api.github.com/repos/sofiaateixeiraa/{}/languages"
+          linguist_url = "https://raw.githubusercontent.com/github-linguist/linguist/main/lib/linguist/languages.yml"
+          language_group = re.compile(
+              r'    <g transform="translate\(30, (?P<row_y>\d+)\)">.*?(?=  <svg x="0")',
+              re.DOTALL,
+          )
+
+          request = Request(
+              linguist_url,
+              headers={"User-Agent": "sofiaateixeiraa-readme-cards"},
+          )
+          with urlopen(request) as response:
+              linguist_yaml = response.read().decode("utf-8")
+
+          language_colors = {}
+          current_language = None
+          for line in linguist_yaml.splitlines():
+              if line and not line[0].isspace() and line.rstrip().endswith(":"):
+                  current_language = line.rstrip()[:-1].strip().strip("'\"")
+              elif current_language:
+                  color_match = re.match(
+                      r'\s+color:\s*["\']?(#[0-9A-Fa-f]{6})', line
+                  )
+                  if color_match:
+                      language_colors[current_language] = color_match.group(1)
+
+          for repo in repos:
+              request = Request(
+                  languages_url.format(repo),
+                  headers={
+                      "Accept": "application/vnd.github+json",
+                      "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+                      "User-Agent": "sofiaateixeiraa-readme-cards",
+                  },
+              )
+              with urlopen(request) as response:
+                  language_bytes = json.load(response)
+
+              top_languages = sorted(
+                  language_bytes.items(), key=lambda item: item[1], reverse=True
+              )[:3]
+              labels = []
+              for index, (language, _) in enumerate(top_languages):
+                  x = index * 90
+                  color = language_colors.get(language, "#8B949E")
+                  labels.append(
+                      f'''      <g transform="translate({x}, 0)">
+                  <circle cx="0" cy="-5" r="6" fill="{color}" />
+                  <text class="gray" x="15">{escape(language)}</text>
+                </g>'''
+                  )
+
+              svg_path = Path(f"profile/pin-{repo}.svg")
+              svg = svg_path.read_text(encoding="utf-8")
+
+              svg, height_count = re.subn(
+                  r'(<svg\s+width="400"\s+height=")\d+(")',
+                  r'\g<1>325\g<2>',
+                  svg,
+                  count=1,
+              )
+              svg, viewbox_count = re.subn(
+                  r'(viewBox="0 0 400 )\d+(")',
+                  r'\g<1>325\g<2>',
+                  svg,
+                  count=1,
+              )
+              svg, chart_count = re.subn(
+                  r'(transform="translate\(-3, )\d+(\)")',
+                  r'\g<1>138\g<2>',
+                  svg,
+                  count=1,
+              )
+              if (height_count, viewbox_count, chart_count) != (1, 1, 1):
+                  raise RuntimeError(f"Could not normalize the card dimensions in {svg_path}")
+
+              style_overrides = """
+          .header { font-size: 22px !important; }
+          .description { font-size: 18px !important; }
+          .gray { font-size: 15px !important; }
+          .icon { display: none !important; }
+              """
+              svg, style_count = re.subn(
+                  r'</style>',
+                  style_overrides + '\n        </style>',
+                  svg,
+                  count=1,
+              )
+              if style_count != 1:
+                  raise RuntimeError(f"Could not apply the card styling in {svg_path}")
+
+              svg, title_count = re.subn(
+                  r'(<g transform=")translate\(25, 0\)(">\s*<text[\s\S]*?class="header")',
+                  r'\g<1>translate(0, 0)\g<2>',
+                  svg,
+                  count=1,
+              )
+              if title_count != 1:
+                  raise RuntimeError(f"Could not align the title in {svg_path}")
+
+              svg, title_y_count = re.subn(
+                  r'(data-testid="card-title"\s+transform="translate\(25, )35(\)")',
+                  r'\g<1>47\g<2>',
+                  svg,
+                  count=1,
+              )
+              svg, body_y_count = re.subn(
+                  r'(data-testid="main-card-body"\s+transform="translate\(0, )55(\)")',
+                  r'\g<1>67\g<2>',
+                  svg,
+                  count=1,
+              )
+              if (title_y_count, body_y_count) != (1, 1):
+                  raise RuntimeError(f"Could not center the card content in {svg_path}")
+
+              description_pattern = re.compile(
+                  r'(<text class="description" x="25" y="-5">\s*)'
+                  r'(.*?)'
+                  r'(\s*</text>)',
+                  re.DOTALL,
+              )
+
+              def reflow_description(match):
+                  tspans = re.findall(
+                      r'<tspan\b[^>]*>(.*?)</tspan>', match.group(2), re.DOTALL
+                  )
+                  description = unescape(" ".join(unescape(line) for line in tspans))
+                  lines = textwrap.wrap(
+                      description,
+                      width=40,
+                      break_long_words=False,
+                      break_on_hyphens=False,
+                  )
+                  if not lines:
+                      raise RuntimeError(f"Could not read the description in {svg_path}")
+                  wrapped = "".join(
+                      f'<tspan dy="1.2em" x="25">{escape(line)}</tspan>'
+                      for line in lines
+                  )
+                  return match.group(1) + wrapped + match.group(3)
+
+              svg, description_count = description_pattern.subn(
+                  reflow_description, svg, count=1
+              )
+              if description_count != 1:
+                  raise RuntimeError(f"Could not reflow the description in {svg_path}")
+
+              def replace_language_row(match):
+                  return (
+                      '    <g transform="translate(30, 121)">\n'
+                      + "\n".join(labels)
+                      + "\n    </g>\n    \n  "
+                  )
+
+              updated_svg, count = language_group.subn(
+                  replace_language_row, svg, count=1
+              )
+              if count != 1:
+                  raise RuntimeError(f"Could not find the language row in {svg_path}")
+
+              preview_path = Path(f"profile/previews/{repo}.jpg")
+              if not preview_path.exists():
+                  raise RuntimeError(f"Missing preview image: {preview_path}")
+              preview_b64 = base64.b64encode(preview_path.read_bytes()).decode("ascii")
+              preview = (
+                  '<clipPath id="preview-clip">'
+                  '<rect x="25" y="205" width="350" height="105" rx="6"/>'
+                  '</clipPath>'
+                  '<image x="25" y="205" width="350" height="105" '
+                  'preserveAspectRatio="xMidYMid slice" clip-path="url(#preview-clip)" '
+                  f'href="data:image/jpeg;base64,{preview_b64}"/>'
+              )
+              head, _, tail = updated_svg.rpartition("</svg>")
+              updated_svg = head + preview + "</svg>" + tail
+
+              svg_path.write_text(updated_svg, encoding="utf-8")
+          PY
+
+      - name: Commit cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/*.svg
+          git commit -m "Update README cards" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase -X theirs origin "$GITHUB_REF_NAME" && git push && exit 0
+            echo "Push failed (attempt $attempt), retrying..."
+            sleep 5
+          done
+          exit 1
