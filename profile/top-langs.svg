@@ -1,7 +1,7 @@
 <svg width="467" height="195" viewBox="0 0 467 195" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
   <title id="title">Most Used Languages</title>
   <style>
-    .title { font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif; fill: #A78BFA; animation: fade 0.8s ease-in-out backwards; }
+    .title { font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F23E5E; animation: fade 0.8s ease-in-out backwards; }
     .lang { font: 400 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFFFFF; }
     .row { animation: fade 0.3s ease-in-out backwards; }
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
