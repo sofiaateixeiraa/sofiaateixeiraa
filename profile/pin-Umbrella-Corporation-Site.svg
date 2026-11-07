@@ -140,6 +140,10 @@
         <circle cx="0" cy="-5" r="6" fill="#663399" />
         <text class="gray" x="15">CSS</text>
       </g>
+      <g transform="translate(180, 0)">
+        <circle cx="0" cy="-5" r="6" fill="#f1e05a" />
+        <text class="gray" x="15">JavaScript</text>
+      </g>
     </g>
     
     <svg x="0" y="0"><g transform="translate(-3, 138)">
