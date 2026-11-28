@@ -26,6 +26,25 @@ const sofia = {
 ```
 
 <details open>
+  <summary><h2>📂 My Projects</h2></summary>
+  <p align="left">
+    <a href="https://github.com/sofiaateixeiraa/ISTEConnect">
+      <img width="278" alt="ISTEConnect project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-ISTEConnect.svg" />
+    </a>
+    <a href="https://github.com/sofiaateixeiraa/ComicTrack">
+      <img width="278" alt="ComicTrack project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-ComicTrack.svg" />
+    </a>
+    <a href="https://github.com/sofiaateixeiraa/Umbrella-Corporation-Site">
+      <img width="278" alt="Umbrella Corporation Site project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-Umbrella-Corporation-Site.svg" />
+    </a>
+    <a href="https://github.com/sofiaateixeiraa/SensiGlove">
+      <img width="278" alt="SensiGlove project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-SensiGlove.svg" />
+    </a>
+  </p>
+<a href="https://github.com/sofiaateixeiraa?tab=repositories&sort=updated"><img alt="All Repositories" title="All Repositories" src="https://custom-icon-badges.demolab.com/badge/-Click%20Here%20For%20All%20My%20Repos-1F222E?style=for-the-badge&logoColor=white&logo=repo"/></a>
+</details>
+
+<details open>
   <summary><h2>🛠️ Tech Stack</h2></summary>
   <table>
     <tr>
@@ -62,39 +81,17 @@ const sofia = {
       <img width="30px" alt="Supabase" title="Supabase" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/supabase/supabase-original.svg" /></td>
     </tr>
     <tr>
-      <td><b>🔌 Hardware & Design</b></td>
-      <td><img width="30px" alt="Arduino" title="Arduino" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/arduino/arduino-original.svg" />&nbsp;&nbsp;&nbsp;
-      <img width="30px" alt="Figma" title="Figma" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/figma/figma-original.svg" /></td>
-    </tr>
-    <tr>
-      <td><b>🖥️ Software and Tools</b></td>
+      <td><b>🖥️ Software & Tools</b></td>
       <td><img width="27px" alt="Git" title="Git" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
       <img width="27px" alt="Visual Studio 2026" title="Visual Studio 2026" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/visualstudio/visualstudio-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
       <img width="27px" alt="VS Code" title="VS Code" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/vscode/vscode-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
       <img width="27px" alt="Android Studio" title="Android Studio" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/androidstudio/androidstudio-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
       <img width="27px" alt="Postman" title="Postman" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postman/postman-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
-      <img width="27px" alt="XAMPP" title="XAMPP" src="https://cdn.simpleicons.org/xampp" /></td>
+      <img width="27px" alt="XAMPP" title="XAMPP" src="https://cdn.simpleicons.org/xampp" />&nbsp;&nbsp;&nbsp;&nbsp;
+      <img width="27px" alt="Figma" title="Figma" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/figma/figma-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
+      <img width="27px" alt="Arduino" title="Arduino" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/arduino/arduino-original.svg" /></td>
     </tr>
   </table>
-</details>
-
-<details open>
-  <summary><h2>📘 My Projects</h2></summary>
-  <p align="left">
-    <a href="https://github.com/sofiaateixeiraa/ComicTrack">
-      <img width="278" alt="ComicTrack project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-ComicTrack.svg" />
-    </a>
-    <a href="https://github.com/sofiaateixeiraa/ISTEConnect">
-      <img width="278" alt="ISTEConnect project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-ISTEConnect.svg" />
-    </a>
-    <a href="https://github.com/sofiaateixeiraa/SensiGlove">
-      <img width="278" alt="SensiGlove project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-SensiGlove.svg" />
-    </a>
-    <a href="https://github.com/sofiaateixeiraa/Umbrella-Corporation-Site">
-      <img width="278" alt="Umbrella Corporation Site project card" src="https://raw.githubusercontent.com/sofiaateixeiraa/sofiaateixeiraa/output/profile/pin-Umbrella-Corporation-Site.svg" />
-    </a>
-  </p>
-<a href="https://github.com/sofiaateixeiraa?tab=repositories&sort=updated"><img alt="All Repositories" title="All Repositories" src="https://custom-icon-badges.demolab.com/badge/-Click%20Here%20For%20All%20My%20Repos-1F222E?style=for-the-badge&logoColor=white&logo=repo"/></a>
 </details>
 
 <details open>
